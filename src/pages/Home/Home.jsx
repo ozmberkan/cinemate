@@ -4,19 +4,8 @@ import { getAllMovies } from "~/redux/slices/moviesSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { movies } = useSelector((state) => state.movies);
 
-  useEffect(() => {
-    dispatch(getAllMovies());
-  }, [dispatch]);
-
-  console.log(movies);
-
-  return (
-    <div>
-      {movies && movies.map((movie) => <div key={movie.id}>{movie.title}</div>)}
-    </div>
-  );
+  return <div>Home</div>;
 };
 
 export default Home;

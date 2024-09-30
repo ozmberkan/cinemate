@@ -33,13 +33,9 @@ const Users = () => {
         friends: arrayUnion(data),
       });
 
-      if (storedUser && storedUser.friends) {
-        storedUser.friends = [...storedUser.friends, data];
-      } else {
-        storedUser.friends = [data];
-      }
-
+      storedUser.friends = [...(storedUser.friends || []), data];
       localStorage.setItem("user", JSON.stringify(storedUser));
+
       dispatch(getAllUsers());
     } catch (error) {
       console.log("Error updating friends: ", error);
@@ -51,14 +47,18 @@ const Users = () => {
   }, [dispatch]);
 
   if (isLoading) {
-    return <l-tail-chase size="40" speed="1.75" color="black"></l-tail-chase>;
+    return (
+      <div className="w-full h-screen items-center flex justify-center">
+        <l-tail-chase size="40" speed="1.75" color="#F37E4F"></l-tail-chase>
+      </div>
+    );
   }
 
   if (isSuccess) {
     const loggedInUser = JSON.parse(localStorage.getItem("user"));
 
     return (
-      <div>
+      <div className="w-full grid grid-cols-4 p-5 gap-5">
         {users.map((user) => {
           if (!loggedInUser || loggedInUser.uid === user.uid) {
             return null;
@@ -69,9 +69,14 @@ const Users = () => {
             loggedInUser.friends.some((friend) => friend.uid === user.uid);
 
           return (
-            <div key={user.uid} className="border flex flex-col p-5">
-              {user.displayName}
-              <span>Takip Sayısı: {user.friends.length}</span>
+            <div
+              key={user.uid}
+              className="border flex flex-col p-5 rounded-md bg-white"
+            >
+              <div className="w-full flex justify-between items-center">
+                <span className="font-semibold">@{user.displayName}</span>
+                <span>Takip Sayısı: {user.friends.length}</span>
+              </div>
               {isFollowing ? (
                 <span className="text-green-500">Takip Ediyorsun</span>
               ) : (

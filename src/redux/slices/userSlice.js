@@ -67,6 +67,7 @@ export const loginService = createAsyncThunk(
         email: user.email,
         displayName: user.displayName,
         movies: userDoc.data().movies || [],
+        friends: userDoc.data().friends || [],
       };
 
       return userData;

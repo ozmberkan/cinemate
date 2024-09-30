@@ -10,6 +10,8 @@ import Layout from "./layouts/Layout";
 import Landing from "./pages/Landing/Landing";
 import { useSelector } from "react-redux";
 import Users from "./pages/Users/Users";
+import AddList from "./pages/List/Add/AddList";
+import Profile from "./pages/Profile/Profile";
 
 const App = () => {
   const { user } = useSelector((store) => store.user);
@@ -30,6 +32,14 @@ const App = () => {
         {
           path: "users",
           element: user ? <Users /> : <Navigate to="/login" />,
+        },
+        {
+          path: "add-list",
+          element: user ? <AddList /> : <Navigate to="/login" />,
+        },
+        {
+          path: "profile",
+          element: user ? <Profile /> : <Navigate to="/login" />,
         },
       ],
     },
