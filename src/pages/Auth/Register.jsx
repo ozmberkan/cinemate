@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { registerScheme } from "~/validation/scheme";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerService } from "~/redux/slices/userSlice";
 import Logo from "../../assets/logo.png";
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isSuccess, isError } = useSelector((store) => store.user);
   const {
     register,
     handleSubmit,
@@ -18,10 +19,18 @@ const Register = () => {
     resolver: zodResolver(registerScheme),
   });
 
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/home");
+    }
+    if (isError) {
+      console.log("Hata var!");
+    }
+  }, [isSuccess, isError, navigate]);
+
   const registerHandle = (data) => {
     try {
       dispatch(registerService(data));
-      navigate("/home");
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +38,7 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center w-full h-screen flex-col">
-      <img src={Logo} />
+      {/* <img src={Logo} /> */}
       <div className="bg-white rounded-md border p-5 w-[500px]">
         <div className="flex flex-col gap-y-2">
           <h1 className="font-medium text-3xl">Kayıt Ol</h1>

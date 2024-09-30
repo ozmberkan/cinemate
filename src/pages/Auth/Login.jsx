@@ -38,7 +38,7 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center w-full h-screen flex-col ">
-      <img src={Logo} />
+      {/* <img src={Logo} /> */}
       <div className="bg-white rounded-md border p-5 w-[500px] relative">
         <div className="flex flex-col gap-y-2">
           <h1 className="font-medium text-3xl">Giriş Yap</h1>

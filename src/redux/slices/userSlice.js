@@ -4,11 +4,12 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { auth, db } from "~/firebase/firebase";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
+  users: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -36,6 +37,7 @@ export const registerService = createAsyncThunk(
         email: user.email,
         displayName: user.displayName,
         movies: [],
+        friends: [],
       };
 
       await setDoc(doc(collection(db, "users"), user.uid), userData);
@@ -68,6 +70,22 @@ export const loginService = createAsyncThunk(
       };
 
       return userData;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getAllUsers = createAsyncThunk(
+  "users/getAllUsers",
+  async (_, { rejectWithValue }) => {
+    try {
+      const usersRef = collection(db, "users");
+      const snapshot = await getDocs(usersRef);
+
+      const data = snapshot.docs.map((doc) => doc.data());
+
+      return data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -111,6 +129,23 @@ export const userSlice = createSlice({
         localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(loginService.rejected, (state, action) => {
+        state.isError = true;
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.errorMessage = action.payload;
+      })
+      .addCase(getAllUsers.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+      })
+      .addCase(getAllUsers.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.users = action.payload;
+      })
+      .addCase(getAllUsers.rejected, (state, action) => {
         state.isError = true;
         state.isLoading = false;
         state.isSuccess = false;
