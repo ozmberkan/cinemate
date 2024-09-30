@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply bg-bgcolor font-ubuntu
+}
+
+
+@layer base {
+    @font-face {
+      font-family: 'Relieve';
+      src: url(/src/assets/fonts/Relieve.ttf) format('truetype');
+    }
+  }
