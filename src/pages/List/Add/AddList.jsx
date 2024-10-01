@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMovies } from "~/redux/slices/moviesSlice";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "~/firebase/firebase";
 import { IoAddCircleOutline } from "react-icons/io5";
+import { getUserById } from "~/redux/slices/userSlice";
 
 const AddList = () => {
   const dispatch = useDispatch();
@@ -39,37 +40,25 @@ const AddList = () => {
     }
 
     try {
-      const savedUser = JSON.parse(localStorage.getItem("user"));
-      const currentMovies = savedUser?.movies || [];
-
-      const updatedMovies = [...currentMovies, selectedMovies];
-
-      const updatedUser = {
-        ...savedUser,
-        movies: updatedMovies,
-      };
-
       const userRef = doc(db, "users", user.uid);
 
+      const movieBatch = {
+        ...selectedMovies
+      };
+
       await updateDoc(userRef, {
-        movies: arrayUnion({
-          selectedMovies,
-        }),
+        movies: arrayUnion(movieBatch),
       });
 
-      localStorage.setItem("user", JSON.stringify(updatedUser));
-
-      console.log("Filmler localStorage'a eklendi");
-
+      dispatch(getUserById(user.uid));
       setSelectedMovies([]);
-      localStorage.removeItem("selectedMovies");
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div className="w-full p-5 flex flex-col gap-y-5">
+    <div className="w-full p-5 flex flex-col gap-y-5 justify-center items-center">
       <h1 className="text-4xl font-semibold">Liste Oluştur!</h1>
       <div className="flex gap-10">
         <ul className="w-3/4 grid grid-cols-4 gap-5">

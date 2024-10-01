@@ -1,11 +1,16 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllMovies } from "~/redux/slices/moviesSlice";
+import React from "react";
+import Feature from "~/components/Home/Feature";
+import Hero from "~/components/Home/Hero";
 
 const Home = () => {
-  const dispatch = useDispatch();
-
-  return <div>Home</div>;
+  return (
+    <div className="w-full flex-grow flex flex-col justify-center items-center bg-bg bg-no-repeat bg-cover">
+      <div className="flex w-full">
+        <Hero />
+        <Feature />
+      </div>
+    </div>
+  );
 };
 
 export default Home;

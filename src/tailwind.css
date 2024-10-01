@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    @apply bg-bgcolor font-ubuntu
+    @apply bg-[#010100] font-ubuntu
 }
 
 
@@ -13,3 +13,8 @@ body {
       src: url(/src/assets/fonts/Relieve.ttf) format('truetype');
     }
   }
+
+
+.bgGradient {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8500) 8%, rgba(0, 0, 0, 0.8465) 15.67%, rgba(0, 0, 0, 0.8361) 23.33%, rgba(0, 0, 0, 0.8187) 31%, rgba(0, 0, 0, 0.7944) 38.67%, rgba(0, 0, 0, 0.7632) 46.33%, rgba(0, 0, 0, 0.7250) 54%, rgba(0, 0, 0, 0.6868) 61.67%, rgba(0, 0, 0, 0.6556) 69.33%, rgba(0, 0, 0, 0.6312) 77%, rgba(0, 0, 0, 0.6139) 84.67%, rgba(0, 0, 0, 0.6035) 92.33%, rgba(0, 0, 0, 0.6000) 100%);
+}

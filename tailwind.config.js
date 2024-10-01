@@ -17,6 +17,9 @@ export default {
       dropShadow: {
         "3xl": "0px 0px 50px rgba(249,188,44, 1)",
       },
+      backgroundImage: {
+        bg: "url('/src/assets/bg.png')",
+      },
     },
   },
   plugins: [],

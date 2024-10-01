@@ -1,12 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Sidebar/Sidebar";
 import FlexContainer from "~/containers/FlexContainer";
+import Navbar from "../components/Navbar/Navbar";
 
 const Layout = () => {
   return (
     <FlexContainer>
-      <Sidebar />
+      <Navbar />
       <Outlet />
     </FlexContainer>
   );

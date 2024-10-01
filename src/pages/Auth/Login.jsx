@@ -29,7 +29,7 @@ const Login = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/home");
+      navigate("/");
     }
     if (isError) {
       console.log("Hata var!");
@@ -37,11 +37,11 @@ const Login = () => {
   }, [isSuccess, isError, navigate]);
 
   return (
-    <div className="flex justify-center items-center w-full h-screen flex-col ">
+    <div className="flex justify-center items-center w-full h-screen flex-col bg-bg bg-center bg-no-repeat bg-cover">
       {/* <img src={Logo} /> */}
-      <div className="bg-white rounded-md border p-5 w-[500px] relative">
+      <div className="bg-neutral-900 rounded-md border border-zinc-800 p-5 w-[500px] relative">
         <div className="flex flex-col gap-y-2">
-          <h1 className="font-medium text-3xl">Giriş Yap</h1>
+          <h1 className="font-medium text-3xl text-white">Giriş Yap</h1>
           <p className="text-zinc-400 text-sm">
             Cinemate hesabınız yok mu? Hemen giriş yapın ve en sevdiğiniz
             filmleri keşfedin ve arkadaşlarınızla paylaşın.
@@ -57,7 +57,7 @@ const Login = () => {
               type="text"
               placeholder="E-Posta giriniz..."
               {...register("email")}
-              className={`w-full px-4 py-2 rounded-md border outline-none focus:ring-2 ring-offset-1 ring-zinc-300 ${
+              className={`w-full px-4 py-2 text-white rounded-md border outline-none focus:ring-2 ring-offset-1 bg-transparent border-zinc-800 ring-zinc-600 ring-offset-transparent ${
                 errors.username && "ring-red-500"
               } transition-all`}
             />
@@ -69,18 +69,21 @@ const Login = () => {
               type="password"
               placeholder="Parola giriniz..."
               {...register("password")}
-              className={`w-full px-4 py-2 rounded-md border outline-none focus:ring-2 ring-offset-1 ring-zinc-300 ${
+              className={`w-full px-4 py-2 text-white rounded-md border outline-none focus:ring-2 ring-offset-1 bg-transparent border-zinc-800 ring-zinc-600 ring-offset-transparent ${
                 errors.username && "ring-red-500"
               } transition-all`}
             />
           </div>
           <button
             type="submit"
-            className="px-4 font-medium py-2 rounded-md bg-gradient-to-r from-[#F37E4F] to-[rgb(249,188,44)] text-white transition-all hover:ring-2 ring-offset-2 ring-[#f9bc2c]"
+            className="px-4 mt-3 font-medium py-2 rounded-md bg-gradient-to-r from-[#F37E4F] to-[rgb(249,188,44)] text-white"
           >
             Giriş Yap
           </button>
-          <Link to="/register" className="text-sm hover:underline">
+          <Link
+            to="/register"
+            className="text-sm hover:underline text-zinc-300"
+          >
             Hesabın yok mu ?
           </Link>
         </form>
