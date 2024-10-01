@@ -4,6 +4,7 @@ import { getAllUsers } from "~/redux/slices/userSlice";
 import { tailChase } from "ldrs";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "~/firebase/firebase";
+import { Link } from "react-router-dom";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -71,24 +72,39 @@ const Users = () => {
           return (
             <div
               key={user.uid}
-              className="border flex flex-col p-5 rounded-md bg-white"
+              className="border border-neutral-600 flex flex-col p-5 gap-5 rounded-md bg-neutral-800 "
             >
               <div className="w-full flex justify-between items-center">
-                <span className="font-semibold">@{user.displayName}</span>
-                <span>Takip Sayısı: {user.friends.length}</span>
+                <span className="font-semibold text-white">
+                  @{user.displayName}
+                </span>
+                <span className="text-white">
+                  Takip Sayısı: {user.friends.length}
+                </span>
               </div>
-              {isFollowing ? (
-                <span className="text-green-500">Takip Ediyorsun</span>
-              ) : (
-                <button
-                  onClick={() =>
-                    followHandle({ username: user.displayName, uid: user.uid })
-                  }
-                  className="px-4 py-2 rounded-md border bg-blue-500 text-white"
+              <div className="w-full justify-between flex items-center">
+                {isFollowing ? (
+                  <span className="text-green-500">Takip Ediyorsun</span>
+                ) : (
+                  <button
+                    onClick={() =>
+                      followHandle({
+                        username: user.displayName,
+                        uid: user.uid,
+                      })
+                    }
+                    className="px-4 py-2 rounded-md border bg-blue-500 text-white"
+                  >
+                    Takip Et
+                  </button>
+                )}
+                <Link
+                  to={`/profile/${user.uid}`}
+                  className="px-4 py-2 rounded-md bg-white "
                 >
-                  Takip Et
-                </button>
-              )}
+                  Profiline Git
+                </Link>
+              </div>
             </div>
           );
         })}

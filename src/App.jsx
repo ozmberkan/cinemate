@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import Users from "./pages/Users/Users";
 import AddList from "./pages/List/Add/AddList";
 import Profile from "./pages/Profile/Profile";
+import ProfileDetail from "./pages/Profile/ProfileDetail/ProfileDetail";
 
 const App = () => {
   const { user } = useSelector((store) => store.user);
@@ -35,6 +36,10 @@ const App = () => {
         {
           path: "profile",
           element: user ? <Profile /> : <Navigate to="/login" />,
+        },
+        {
+          path: "profile/:id",
+          element: user ? <ProfileDetail /> : <Navigate to="/login" />,
         },
       ],
     },

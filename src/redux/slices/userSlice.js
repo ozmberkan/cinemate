@@ -10,6 +10,7 @@ import { auth, db } from "~/firebase/firebase";
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
   users: [],
+  detailedUser: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -176,7 +177,7 @@ export const userSlice = createSlice({
         state.isError = false;
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.detailedUser = action.payload;
         localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(getUserById.rejected, (state, action) => {
