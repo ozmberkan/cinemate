@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 const Profile = () => {
   const { user } = useSelector((store) => store.user);
 
-  return <div></div>;
+  return <div>{user.displayName}</div>;
 };
 
 export default Profile;

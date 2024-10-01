@@ -109,6 +109,24 @@ export const getUserById = createAsyncThunk("users/getUserById", async (id) => {
   }
 });
 
+export const getUserDetailById = createAsyncThunk(
+  "users/getUserDetailById",
+  async (id) => {
+    try {
+      const userDoc = await getDoc(doc(db, "users", id));
+
+      if (userDoc.exists()) {
+        return userDoc.data();
+      } else {
+        throw new Error("User not found");
+      }
+    } catch (error) {
+      console.error("Error fetching user:", error);
+      throw error;
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -177,10 +195,27 @@ export const userSlice = createSlice({
         state.isError = false;
         state.isLoading = false;
         state.isSuccess = true;
-        state.detailedUser = action.payload;
+        state.user = action.payload;
         localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(getUserById.rejected, (state, action) => {
+        state.isError = true;
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.errorMessage = action.payload;
+      })
+      .addCase(getUserDetailById.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+      })
+      .addCase(getUserDetailById.fulfilled, (state, action) => {
+        state.isError = false;
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.detailedUser = action.payload;
+      })
+      .addCase(getUserDetailById.rejected, (state, action) => {
         state.isError = true;
         state.isLoading = false;
         state.isSuccess = false;
