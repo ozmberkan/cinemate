@@ -43,7 +43,7 @@ const AddList = () => {
       const userRef = doc(db, "users", user.uid);
 
       const movieBatch = {
-        ...selectedMovies
+        ...selectedMovies,
       };
 
       await updateDoc(userRef, {
@@ -58,15 +58,14 @@ const AddList = () => {
   };
 
   return (
-    <div className="w-full p-5 flex flex-col gap-y-5 justify-center items-center">
-      <h1 className="text-4xl font-semibold">Liste Oluştur!</h1>
+    <div className="w-full p-5 flex flex-grow gap-y-5 justify-center items-center bg-bg bg-no-repeat bg-center bg-cover">
       <div className="flex gap-10">
-        <ul className="w-3/4 grid grid-cols-4 gap-5">
+        <ul className="w-full grid grid-cols-6 gap-5">
           {movies.map((movie, index) => (
             <div className="relative" key={index}>
               <img
                 src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-                className="object-cover rounded-md shadow-md w-full h-[130px]"
+                className="object-cover rounded-md shadow-md w-full h-[120px] "
                 alt={movie.title}
               />
               <button
@@ -76,7 +75,7 @@ const AddList = () => {
                     image: movie.backdrop_path,
                   })
                 }
-                className="absolute top-3 right-3 text-4xl text-yellow-500"
+                className="absolute top-3 right-3 text-4xl text-red-500"
               >
                 <IoAddCircleOutline />
               </button>

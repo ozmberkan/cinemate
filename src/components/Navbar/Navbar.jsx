@@ -35,10 +35,16 @@ const Navbar = () => {
             Liste Oluştur
             <IoAddCircle size={20} />
           </Link>
-          <Link className="border font-semibold hover:bg-white hover:text-black transition-colors  text-white px-4 py-2 rounded-md">
+          <Link
+            to="/profile"
+            className="border font-semibold hover:bg-white hover:text-black transition-colors  text-white px-4 py-2 rounded-md"
+          >
             Profilim
           </Link>
-          <Link className="border font-semibold hover:bg-white hover:text-black transition-colors  text-white px-4 py-2 rounded-md">
+          <Link
+            to="/users"
+            className="border font-semibold hover:bg-white hover:text-black transition-colors  text-white px-4 py-2 rounded-md"
+          >
             Kullanıcılar
           </Link>
           <button
