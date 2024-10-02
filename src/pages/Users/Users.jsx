@@ -53,7 +53,7 @@ const Users = () => {
 
   if (isSuccess) {
     return (
-      <div className="w-full grid grid-cols-4 p-5 gap-5">
+      <div className="w-full grid grid-cols-4 p-5 gap-5 py-32 h-screen bg-blue-500">
         {filteredUsers.map((otherUser) => (
           <div
             key={otherUser.uid}

@@ -23,8 +23,8 @@ const Navbar = () => {
   };
 
   return (
-    <>
-      <div className="w-full  py-6 flex justify-between items-center">
+    <div className="fixed container top-0 z-20">
+      <div className="w-full  py-6 flex justify-between items-center ">
         <Link to="/" className="flex gap-x-2">
           <img src={Logo} className="w-8" />
           <h1 className="font-changa text-2xl  text-white ">cinemate</h1>
@@ -33,6 +33,7 @@ const Navbar = () => {
           <div className="text-white flex items-center gap-x-3 ">
             {navTabs.map((tab) => (
               <Link
+                key={tab.id}
                 to={tab.to}
                 className="px-4 rounded-full border border-white/20 py-2 hover:border-white  group-hover:opacity-100 hover:shadow-white-500 shadow-sm  hover:bg-gradient-to-t from-white/10 to-black/0 transition-all duration-1000"
               >
@@ -49,7 +50,7 @@ const Navbar = () => {
         ) : (
           <div className="text-white flex items-center gap-x-3 ">
             <Link
-              to="/"
+              to="/login"
               className="px-4 rounded-full border border-white/20 py-2 hover:border-green-500 hover:text-green-500 hover:shadow-green-500 shadow-sm  group-hover:opacity-100 hover:bg-gradient-to-t from-green-500/10 to-black/0 transition-all duration-700"
             >
               Oturum Aç
@@ -58,7 +59,7 @@ const Navbar = () => {
         )}
       </div>
       <div className="w-full h-px bg-gradient-to-r from-white/0 via-white/60 to-white/0 " />
-    </>
+    </div>
   );
 };
 

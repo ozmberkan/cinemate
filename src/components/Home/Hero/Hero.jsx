@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import HomeSvg from "../../assets/homeSvg.svg";
+import HomeSvg from "~/assets/homeSvg.svg";
 
 const Hero = () => {
   const text = " Filmler Bizi Bir Araya Getiriyor".split(" ");
   return (
-    <div className="flex justify-center items-center flex-col gap-y-6 text-center h-screen">
-      <img src={HomeSvg} className="absolute  -z-10 animate-pulse" />
+    <div className="flex justify-center items-center flex-col gap-y-6 text-center h-screen ">
+      <img src={HomeSvg} className="absolute w-full  -z-10 animate-pulse" />
       <div className="flex gap-x-5">
         {text.map((word, i) => (
           <motion.h1

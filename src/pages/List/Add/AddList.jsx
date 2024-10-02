@@ -65,7 +65,7 @@ const AddList = () => {
   };
 
   return (
-    <div className="w-full p-5 flex flex-grow gap-y-5 justify-center items-center bg-bg bg-no-repeat bg-center bg-cover">
+    <div className="w-full p-5 flex flex-grow gap-y-5 justify-center items-center bg-bg bg-no-repeat bg-center bg-cover py-32  h-screen bg-blue-500">
       <div className="flex gap-10">
         <ul className="w-full grid grid-cols-6 gap-5">
           {movies.map((movie, index) => (

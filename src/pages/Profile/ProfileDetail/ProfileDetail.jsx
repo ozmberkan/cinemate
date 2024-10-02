@@ -45,7 +45,7 @@ const ProfileDetail = () => {
   };
 
   return (
-    <div className="text-white">
+    <div className="text-white py-32 h-screen bg-blue-500">
       {detailedUser?.displayName} - {id}
       <button
         onClick={() => leaveFollow(detailedUser)}

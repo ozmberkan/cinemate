@@ -28,7 +28,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="text-white px-12">
+    <div className="text-white px-12 w-full py-32 h-screen bg-blue-500">
       <span>{user.displayName}</span>
       <span>
         {user.follows.map((follows) => (
@@ -37,7 +37,7 @@ const Profile = () => {
           </Link>
         ))}
       </span>
-      <div className="w-full grid grid-cols-4  gap-5 rounded-md">
+      <div className="w-full grid grid-cols-4 gap-5 rounded-md">
         {user.lists.map((list, i) => (
           <div key={i} className="flex flex-col gap-y-2 border">
             <h1 className="text-center text-3xl font-bold">{list.listName}</h1>
