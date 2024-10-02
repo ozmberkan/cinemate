@@ -38,7 +38,8 @@ export const registerService = createAsyncThunk(
         email: user.email,
         displayName: user.displayName,
         movies: [],
-        friends: [],
+        follows: [],
+        followers: [],
       };
 
       await setDoc(doc(collection(db, "users"), user.uid), userData);

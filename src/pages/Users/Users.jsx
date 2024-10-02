@@ -3,12 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "~/redux/slices/userSlice";
 import { tailChase } from "ldrs";
 import { Link } from "react-router-dom";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { db } from "~/firebase/firebase";
 
 const Users = () => {
   const dispatch = useDispatch();
   tailChase.register();
 
-  const { users, isLoading, isSuccess } = useSelector((store) => store.user);
+  const { user, users, isLoading, isSuccess } = useSelector(
+    (store) => store.user
+  );
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -22,10 +26,27 @@ const Users = () => {
     );
   }
 
+  const followHandle = async (data) => {
+    const userRef = doc(db, "users", user.uid);
+    const otherUser = doc(db, "users", data.uid);
+
+    await updateDoc(userRef, {
+      follows: arrayUnion(data),
+    });
+
+    await updateDoc(otherUser, {
+      followers: arrayUnion({ username: user.displayName, uid: user.uid }),
+    });
+
+    dispatch(getAllUsers());
+  };
+
+  const filtered = users.filter((u) => u.uid !== user.uid);
+
   if (isSuccess) {
     return (
       <div className="w-full grid grid-cols-4 p-5 gap-5">
-        {users.map((user) => {
+        {filtered.map((user) => {
           return (
             <div
               key={user.uid}
@@ -36,7 +57,10 @@ const Users = () => {
                   @{user.displayName}
                 </span>
                 <span className="text-white">
-                  Takip Sayısı: {user.friends.length}
+                  Takip Sayısı: {user.follows.length}
+                </span>
+                <span className="text-white">
+                  Takipçi Sayısı: {user.followers.length}
                 </span>
               </div>
               <div className="w-full justify-between flex items-center">
