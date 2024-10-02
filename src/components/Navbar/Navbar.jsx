@@ -3,7 +3,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "~/firebase/firebase";
 import { useSelector } from "react-redux";
-import Logo from "../../assets/logo.png";
+import Logo from "/logo.png";
 import { navTabs } from "~/data/data";
 
 const Navbar = () => {

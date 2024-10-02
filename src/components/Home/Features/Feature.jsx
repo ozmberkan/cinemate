@@ -1,8 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import FeatureBox from "~/components/Home/Features/FeatureBox";
-import { motion, useScroll } from "framer-motion";
-import featureSvg from "~/assets/featuresSvg.svg";
+import { motion } from "framer-motion";
+import featureSvg from "/Home/featuresSvg.svg";
 
 import { Features } from "~/data/data";
 

@@ -1,4 +1,4 @@
-import featureSvg from "~/assets/featuresSvg.svg";
+import featuresSvg from "/Home/featuresSvg.svg";
 import { howItWorks } from "~/data/data";
 import { motion } from "framer-motion";
 
@@ -11,7 +11,7 @@ function HowItWorks() {
       className="w-full h-screen flex justify-center items-center"
     >
       <img
-        src={featureSvg}
+        src={featuresSvg}
         className="absolute w-full -z-10"
         alt="Background SVG"
       />

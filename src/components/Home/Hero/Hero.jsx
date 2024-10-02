@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import HomeSvg from "~/assets/homeSvg.svg";
+import HomeSvg from "/Home/homeSvg.svg";
 
 const Hero = () => {
   const text = " Filmler Bizi Bir Araya Getiriyor".split(" ");
