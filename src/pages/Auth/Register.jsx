@@ -5,7 +5,7 @@ import { registerScheme } from "~/validation/scheme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch, useSelector } from "react-redux";
 import { registerService } from "~/redux/slices/userSlice";
-import RegisterSvg from "../../assets/register/register.svg";
+import RegisterSvg from "~/assets/Register/register.svg";
 import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {

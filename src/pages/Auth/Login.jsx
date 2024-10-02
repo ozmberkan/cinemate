@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginService } from "~/redux/slices/userSlice";
 import { loginScheme } from "~/validation/scheme";
-import LoginSvg from "../../assets/login/login.svg";
+import LoginSvg from "~/assets/Login/login.svg";
 import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
