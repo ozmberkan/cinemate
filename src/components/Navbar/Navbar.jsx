@@ -40,9 +40,10 @@ const Navbar = () => {
               <Link
                 key={tab.id}
                 to={tab.to}
-                className="px-4 rounded-full border border-white/20 py-2 hover:border-white  group-hover:opacity-100 hover:shadow-white-500 shadow-sm  hover:bg-gradient-to-t from-white/10 to-black/0 transition-all duration-1000"
+                className="px-4 flex items-center  gap-x-2 rounded-full border border-white/20 py-2 hover:border-white  group-hover:opacity-100 hover:shadow-white-500 shadow-sm  hover:bg-gradient-to-t from-white/10 to-black/0 transition-all duration-1000"
               >
                 {tab.label}
+                {tab.icon && <tab.icon size={20} className="text-red-500" />}
               </Link>
             ))}
             <button

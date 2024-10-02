@@ -12,6 +12,7 @@ import Users from "./pages/Users/Users";
 import AddList from "./pages/List/Add/AddList";
 import Profile from "./pages/Profile/Profile";
 import ProfileDetail from "./pages/Profile/ProfileDetail/ProfileDetail";
+import AllList from "./pages/List/AllList/AllList";
 
 const App = () => {
   const { user } = useSelector((store) => store.user);
@@ -40,6 +41,10 @@ const App = () => {
         {
           path: "profile/:id",
           element: user ? <ProfileDetail /> : <Navigate to="/login" />,
+        },
+        {
+          path: "lists",
+          element: user ? <AllList /> : <Navigate to="/login" />,
         },
       ],
     },

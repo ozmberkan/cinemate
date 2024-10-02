@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMovies } from "~/redux/slices/moviesSlice";
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "~/firebase/firebase";
 import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
 import { getUserById } from "~/redux/slices/userSlice";
+import moment from "moment";
 
 const AddList = () => {
   const dispatch = useDispatch();
@@ -12,6 +19,9 @@ const AddList = () => {
   const { user } = useSelector((state) => state.user);
   const [selectedMovies, setSelectedMovies] = useState([]);
   const [listName, setListName] = useState("");
+
+  const createdAt = new Date();
+  const formattedDate = moment(createdAt).format("DD.MM.YYYY HH:mm");
 
   useEffect(() => {
     dispatch(getAllMovies());
@@ -47,10 +57,16 @@ const AddList = () => {
 
     try {
       const userRef = doc(db, "users", user.uid);
+      const listsRef = doc(collection(db, "lists"));
       const newList = {
+        createdAt: formattedDate,
+        creater: user.displayName,
         listName: listName,
         movies: selectedMovies,
+        id: listsRef.id,
       };
+
+      await setDoc(listsRef, newList);
 
       await updateDoc(userRef, {
         lists: arrayUnion(newList),

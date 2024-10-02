@@ -12,6 +12,7 @@ const Profile = () => {
   const deleteList = async (list) => {
     try {
       const userRef = doc(db, "users", user.uid);
+      const listRef = doc(db, "lists", list.id);
 
       const deletedList = user.lists.filter(
         (item) => item.listName !== list.listName
@@ -21,9 +22,11 @@ const Profile = () => {
         lists: deletedList,
       });
 
+      await deleteDoc(listRef);
+
       dispatch(getUserById(user.uid));
     } catch (error) {
-      console.log(hata);
+      console.log(error);
     }
   };
 

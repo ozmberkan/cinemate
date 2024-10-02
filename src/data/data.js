@@ -4,6 +4,7 @@ import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdFormatListBulletedAdd } from "react-icons/md";
 import { WiStars } from "react-icons/wi";
+import { BsStars } from "react-icons/bs";
 
 export const Features = [
   {
@@ -24,6 +25,7 @@ export const Features = [
 ];
 
 export const navTabs = [
+  { id: 4, label: "Listeler", to: "/lists", icon: BsStars },
   { id: 1, label: "Liste Oluştur", to: "/add-list" },
   { id: 2, label: "Kullanıcılar", to: "/users" },
   { id: 3, label: "Profilim", to: "/profile" },

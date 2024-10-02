@@ -9,14 +9,14 @@ const initialState = {
   errorMessage: "",
 };
 
-const apiKey = import.meta.env.VITE_TMDB_API_KEY;
+const apiKey = import.meta.env.VITE_MOVIE_APP_KEY;
 
 export const getAllMovies = createAsyncThunk(
   "movies/getAllMovies",
   async () => {
     try {
       const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=tr-TR`
+        `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=tr-TR`
       );
       return response.data;
     } catch (error) {
