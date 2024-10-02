@@ -47,12 +47,16 @@ const ProfileDetail = () => {
   return (
     <div className="text-white py-32 h-screen bg-blue-500">
       {detailedUser?.displayName} - {id}
-      <button
-        onClick={() => leaveFollow(detailedUser)}
-        className="px-4 py-2 rounded-md bg-white text-black font-semibold"
-      >
-        Takipten çık
-      </button>
+      {detailedUser?.followers?.some(
+        (follower) => follower.uid === user.uid
+      ) ? (
+        <button
+          onClick={() => leaveFollow(detailedUser)}
+          className="px-4 py-2 rounded-md bg-white text-black font-semibold"
+        >
+          Takipten çık
+        </button>
+      ) : null}
     </div>
   );
 };

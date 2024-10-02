@@ -4,7 +4,7 @@ import Logo from "/logo.png";
 import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <div className="w-full  gap-5 text-white  h-[200px] z-10">
+    <div className="w-full  gap-5 text-white bg-transparent z-10">
       <div className="flex justify-between items-center p-5">
         <Link to="/" className="flex items-center gap-x-2">
           <img src={Logo} className="w-8" />
