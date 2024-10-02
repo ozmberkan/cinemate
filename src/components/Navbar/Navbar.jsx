@@ -5,6 +5,7 @@ import { auth } from "~/firebase/firebase";
 import { useSelector } from "react-redux";
 import Logo from "/logo.png";
 import { navTabs } from "~/data/data";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -15,8 +16,12 @@ const Navbar = () => {
     try {
       await signOut(auth);
       localStorage.removeItem("user");
-      navigate("/login");
-      window.location.reload();
+      navigate("/");
+      toast.success("Başarıyla çıkış yapıyorsunuz.");
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
     } catch (error) {
       console.log(error);
     }

@@ -46,7 +46,7 @@ const Login = () => {
       <Toaster
         toastOptions={{
           className: "",
-          duration: 500,
+          duration: 1500,
           style: {
             background: "#363636",
             color: "#fff",
