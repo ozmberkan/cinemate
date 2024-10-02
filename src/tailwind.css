@@ -7,14 +7,36 @@ body {
 }
 
 
-@layer base {
-    @font-face {
-      font-family: 'Relieve';
-      src: url(/src/assets/fonts/Relieve.ttf) format('truetype');
-    }
-  }
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #F10D13;
+  border: 0px none #ffffff;
 
-
-.bgGradient {
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.8500) 8%, rgba(0, 0, 0, 0.8465) 15.67%, rgba(0, 0, 0, 0.8361) 23.33%, rgba(0, 0, 0, 0.8187) 31%, rgba(0, 0, 0, 0.7944) 38.67%, rgba(0, 0, 0, 0.7632) 46.33%, rgba(0, 0, 0, 0.7250) 54%, rgba(0, 0, 0, 0.6868) 61.67%, rgba(0, 0, 0, 0.6556) 69.33%, rgba(0, 0, 0, 0.6312) 77%, rgba(0, 0, 0, 0.6139) 84.67%, rgba(0, 0, 0, 0.6035) 92.33%, rgba(0, 0, 0, 0.6000) 100%);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F10D13;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #F10D13;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #000000;
+}
+::-webkit-scrollbar-track:active {
+  background: #000000;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }

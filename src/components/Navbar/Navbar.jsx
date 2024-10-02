@@ -2,14 +2,15 @@ import { signOut } from "firebase/auth";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "~/firebase/firebase";
-import { FaHome, FaUsers, FaUser } from "react-icons/fa";
-import { IoAddCircle, IoExit } from "react-icons/io5";
-import { RiPlayListAddFill } from "react-icons/ri";
 import { useSelector } from "react-redux";
+import Logo from "../../assets/logo.png";
+import { navTabs } from "~/data/data";
 
 const Navbar = () => {
   const navigate = useNavigate();
+
   const { user } = useSelector((store) => store.user);
+
   const exit = async () => {
     try {
       await signOut(auth);
@@ -22,47 +23,42 @@ const Navbar = () => {
   };
 
   return (
-    <div className=" w-full flex justify-between items-center gap-y-5 py-4 px-12 bg-transparent  ">
-      <Link to="/" className="text-[40px] font-black text-white">
-        cinemate.
-      </Link>
-      {user ? (
-        <div className="flex gap-x-3">
-          <Link
-            to="/add-list"
-            className="border font-semibold hover:bg-white hover:text-black transition-colors  text-white px-4 py-2 rounded-md flex justify-center items-center gap-x-2"
-          >
-            Liste Oluştur
-            <IoAddCircle size={20} />
-          </Link>
-          <Link
-            to="/profile"
-            className="border font-semibold hover:bg-white hover:text-black transition-colors  text-white px-4 py-2 rounded-md"
-          >
-            Profilim
-          </Link>
-          <Link
-            to="/users"
-            className="border font-semibold hover:bg-white hover:text-black transition-colors  text-white px-4 py-2 rounded-md"
-          >
-            Kullanıcılar
-          </Link>
-          <button
-            onClick={exit}
-            className="border font-semibold bg-white text-black transition-colors hover:text-zinc-700 px-4 py-2 rounded-md"
-          >
-            Çıkış yap
-          </button>
-        </div>
-      ) : (
-        <Link
-          to="/login"
-          className="border font-semibold hover:bg-white hover:text-black transition-colors  text-white px-4 py-2 rounded-md"
-        >
-          Oturum Aç
+    <>
+      <div className="w-full  py-6 flex justify-between items-center">
+        <Link to="/" className="flex gap-x-2">
+          <img src={Logo} className="w-8" />
+          <h1 className="font-changa text-2xl  text-white ">cinemate</h1>
         </Link>
-      )}
-    </div>
+        {user ? (
+          <div className="text-white flex items-center gap-x-3 ">
+            {navTabs.map((tab) => (
+              <Link
+                to={tab.to}
+                className="px-4 rounded-full border border-white/20 py-2 hover:border-white  group-hover:opacity-100 hover:shadow-white-500 shadow-sm  hover:bg-gradient-to-t from-white/10 to-black/0 transition-all duration-1000"
+              >
+                {tab.label}
+              </Link>
+            ))}
+            <button
+              onClick={exit}
+              className="px-4 rounded-full border border-white/20 py-2 hover:border-red-500 hover:text-red-500 hover:shadow-red-500 shadow-sm   group-hover:opacity-100 hover:bg-gradient-to-t from-red-500/10 to-black/0 transition-all duration-700"
+            >
+              Çıkış Yap
+            </button>
+          </div>
+        ) : (
+          <div className="text-white flex items-center gap-x-3 ">
+            <Link
+              to="/"
+              className="px-4 rounded-full border border-white/20 py-2 hover:border-green-500 hover:text-green-500 hover:shadow-green-500 shadow-sm  group-hover:opacity-100 hover:bg-gradient-to-t from-green-500/10 to-black/0 transition-all duration-700"
+            >
+              Oturum Aç
+            </Link>
+          </div>
+        )}
+      </div>
+      <div className="w-full h-px bg-gradient-to-r from-white/0 via-white/60 to-white/0 " />
+    </>
   );
 };
 

@@ -5,20 +5,10 @@ export default {
     extend: {
       fontFamily: {
         ubuntu: ["Ubuntu", "sans-serif"],
-        relieve: ["Relieve", "sans-serif"],
-      },
-      animation: {
-        "spin-slow": "spin 5s linear infinite",
-        "ping-slow": "ping 5s linear infinite",
-      },
-      colors: {
-        bgcolor: "#f9f9f9",
+        changa: ["Changa", "sans-serif"],
       },
       dropShadow: {
-        "3xl": "0px 0px 50px rgba(249,188,44, 1)",
-      },
-      backgroundImage: {
-        bg: "url('/src/assets/bg.png')",
+        "3xl": "0px 0px 70px rgb(251, 21, 44)",
       },
     },
   },

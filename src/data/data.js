@@ -19,3 +19,9 @@ export const Features = [
     icon: IoShieldCheckmarkOutline,
   },
 ];
+
+export const navTabs = [
+  { id: 1, label: "Liste Oluştur", to: "/add-list" },
+  { id: 2, label: "Kullanıcılar", to: "/users" },
+  { id: 3, label: "Profilim", to: "/profile" },
+];
