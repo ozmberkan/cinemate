@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import FlexContainer from "~/containers/FlexContainer";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "~/components/Footer/Footer";
+import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
   return (
@@ -10,6 +11,16 @@ const Layout = () => {
       <Navbar />
       <Outlet />
       <Footer />
+      <Toaster
+        toastOptions={{
+          className: "",
+          duration: 500,
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+        }}
+      />
     </FlexContainer>
   );
 };
