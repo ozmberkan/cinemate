@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMovies } from "~/redux/slices/moviesSlice";
-import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "~/firebase/firebase";
-import { IoAddCircleOutline } from "react-icons/io5";
+import { IoAddCircleOutline, IoRemoveCircleOutline } from "react-icons/io5";
 import { getUserById } from "~/redux/slices/userSlice";
 
 const AddList = () => {
@@ -11,6 +11,7 @@ const AddList = () => {
   const { movies, isLoading } = useSelector((state) => state.movies);
   const { user } = useSelector((state) => state.user);
   const [selectedMovies, setSelectedMovies] = useState([]);
+  const [listName, setListName] = useState("");
 
   useEffect(() => {
     dispatch(getAllMovies());
@@ -29,29 +30,35 @@ const AddList = () => {
       alert("Listeye en fazla 3 film ekleyebilirsiniz.");
       return;
     }
+    setSelectedMovies((selectedMovies) => [...selectedMovies, movie]);
+  };
 
-    setSelectedMovies((prevSelectedMovies) => [...prevSelectedMovies, movie]);
+  const removeMovie = (movieTitle) => {
+    setSelectedMovies((prevSelectedMovies) =>
+      prevSelectedMovies.filter((movie) => movie.title !== movieTitle)
+    );
   };
 
   const finishSelection = async () => {
-    if (selectedMovies.length !== 3) {
-      alert("Lütfen 3 film seçin.");
+    if (!listName.trim()) {
+      alert("Lütfen bir liste adı girin.");
       return;
     }
 
     try {
       const userRef = doc(db, "users", user.uid);
-
-      const movieBatch = {
-        ...selectedMovies,
+      const newList = {
+        listName: listName,
+        movies: selectedMovies,
       };
 
       await updateDoc(userRef, {
-        movies: arrayUnion(movieBatch),
+        lists: arrayUnion(newList),
       });
 
       dispatch(getUserById(user.uid));
       setSelectedMovies([]);
+      setListName("");
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +72,7 @@ const AddList = () => {
             <div className="relative" key={index}>
               <img
                 src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-                className="object-cover rounded-md shadow-md w-full h-[120px] "
+                className="object-cover rounded-md shadow-md w-full h-[120px]"
                 alt={movie.title}
               />
               <button
@@ -76,6 +83,9 @@ const AddList = () => {
                   })
                 }
                 className="absolute top-3 right-3 text-4xl text-red-500"
+                disabled={selectedMovies.some(
+                  (selected) => selected.title === movie.title
+                )}
               >
                 <IoAddCircleOutline />
               </button>
@@ -84,10 +94,23 @@ const AddList = () => {
         </ul>
         <div className="w-1/4 bg-gray-100 p-5 rounded-md shadow-md">
           <h2 className="text-2xl font-semibold mb-4">Seçilen Filmler</h2>
+          <input
+            type="text"
+            placeholder="Liste adı girin"
+            value={listName}
+            onChange={(e) => setListName(e.target.value)}
+            className="w-full mb-4 p-2 border rounded"
+          />
           <ul>
             {selectedMovies.map((movie, index) => (
-              <li key={index} className="mb-2">
+              <li
+                key={index}
+                className="mb-2 flex items-center justify-between"
+              >
                 {movie.title}
+                <button onClick={() => removeMovie(movie.title)}>
+                  <IoRemoveCircleOutline className="text-red-500 text-xl" />
+                </button>
               </li>
             ))}
           </ul>

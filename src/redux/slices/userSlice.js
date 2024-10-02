@@ -37,7 +37,7 @@ export const registerService = createAsyncThunk(
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
-        movies: [],
+        lists: [],
         follows: [],
         followers: [],
       };
@@ -68,8 +68,9 @@ export const loginService = createAsyncThunk(
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
-        movies: userDoc.data().movies || [],
-        friends: userDoc.data().friends || [],
+        lists: userDoc.data().lists || [],
+        follows: userDoc.data().follows || [],
+        followers: userDoc.data().followers || [],
       };
 
       return userData;
