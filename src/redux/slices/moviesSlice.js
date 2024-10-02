@@ -9,7 +9,7 @@ const initialState = {
   errorMessage: "",
 };
 
-const apiKey = import.meta.env.VITE_MOVIE_APP_KEY;
+const apiKey = import.meta.env.VITE_TMDB_API_KEY;
 
 export const getAllMovies = createAsyncThunk(
   "movies/getAllMovies",

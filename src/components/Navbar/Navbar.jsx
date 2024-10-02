@@ -15,13 +15,12 @@ const Navbar = () => {
   const exit = async () => {
     try {
       await signOut(auth);
-      localStorage.removeItem("user");
-      navigate("/");
       toast.success("Başarıyla çıkış yapıyorsunuz.");
 
       setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+        navigate("/");
+        localStorage.removeItem("user");
+      }, 1000);
     } catch (error) {
       console.log(error);
     }
