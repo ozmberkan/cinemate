@@ -10,7 +10,7 @@ const Layout = () => {
     <FlexContainer>
       <Navbar />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
       <Toaster
         toastOptions={{
           className: "",
