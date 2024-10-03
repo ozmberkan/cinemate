@@ -53,8 +53,8 @@ const Login = () => {
           },
         }}
       />
-      <div className="flex justify-center items-center h-screen">
-        <div className="w-[55%] h-full relative flex justify-center items-center">
+      <div className="flex sm:justify-center justify-start items-center sm:h-screen w-full sm:p-0 p-5">
+        <div className="w-[55%] h-full relative sm:flex hidden justify-center items-center">
           <div className="z-20 absolute">
             <h1 className="text-white text-[80px] font-black">cinemate</h1>
             <p className="text-white text-lg">
@@ -67,7 +67,7 @@ const Login = () => {
             className="w-full h-full object-cover absolute opacity-50"
           />
         </div>
-        <div className="w-[45%] flex justify-center items-center h-full">
+        <div className="sm:w-[45%] w-full flex justify-center items-center h-full">
           <div className="bg-neutral-900 rounded-md border border-zinc-800 p-5 w-[500px] relative drop-shadow-3xl ">
             <div className="flex flex-col gap-y-2">
               <h1 className="font-medium text-3xl text-white">Giriş Yap</h1>

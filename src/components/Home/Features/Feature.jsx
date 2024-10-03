@@ -1,30 +1,38 @@
 import { Link } from "react-router-dom";
 import FeatureBox from "~/components/Home/Features/FeatureBox";
 import { motion } from "framer-motion";
-import featureSvg from "/Home/featuresSvg.svg";
-
+import { useMediaQuery } from "react-responsive";
 import { Features } from "~/data/data";
+import featuresSvg from "/Home/featuresSvg.svg";
 
 const Feature = () => {
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      className="w-full text-white flex flex-col gap-y-12 justify-center items-start gap-x-10 px-20 h-screen relative"
+      className="w-full text-white flex flex-col gap-y-12 justify-center items-start gap-x-10 sm:px-20 px-12 h-screen relative"
     >
-      <img src={featureSvg} className="absolute w-full " />
+      {!isTabletOrMobile && (
+        <img
+          src={featuresSvg}
+          className="absolute w-full -z-10"
+          alt="Background SVG"
+        />
+      )}
 
       <motion.h1
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 1 }}
-        className="text-5xl font-semibold"
+        className="sm:text-5xl text-3xl font-semibold"
       >
         Neden cinemate kullanmalısın?
       </motion.h1>
 
       <motion.div
-        className="w-full grid grid-cols-3 gap-5"
+        className="w-full sm:grid sm:grid-cols-3 gap-5 flex flex-col"
         initial="hidden"
         whileInView="visible"
         variants={{

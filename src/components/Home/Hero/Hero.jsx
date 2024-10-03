@@ -6,9 +6,9 @@ import HomeSvg from "/Home/homeSvg.svg";
 const Hero = () => {
   const text = " Filmler Bizi Bir Araya Getiriyor".split(" ");
   return (
-    <div className="flex justify-center items-center flex-col gap-y-6 text-center h-screen ">
-      <img src={HomeSvg} className="absolute w-full  -z-10 animate-pulse" />
-      <div className="flex gap-x-5">
+    <div className="flex justify-center items-center flex-col gap-y-6 text-center h-screen sm:mt-0">
+      <img src={HomeSvg} className="absolute w-full -z-10 animate-pulse" />
+      <div className="flex sm:flex-row flex-col gap-x-5 ">
         {text.map((word, i) => (
           <motion.h1
             initial={{ opacity: 0 }}
@@ -18,13 +18,13 @@ const Hero = () => {
               delay: i / 10,
             }}
             key={i}
-            className="text-[100px] font-black bg-clip-text bg-gradient-to-br from-[#ff7171] to-[#ff0000] text-transparent drop-shadow-3xl "
+            className="sm:text-[100px] text-[40px] font-black bg-clip-text bg-gradient-to-br from-[#ff7171] to-[#ff0000] text-transparent drop-shadow-3xl "
           >
             {word}
           </motion.h1>
         ))}
       </div>
-      <p className="text-white/90 w-2/3 text-xl font-semibold ">
+      <p className="text-white/90 sm:w-2/3 w-full sm:text-xl text-sm font-semibold  sm:p-5 ">
         Bugün ne izleyeceğinizi bilmiyorsan, diğer kullanıcıların en çok
         beğendiği filmlere göz atın. Listeleri inceleyin ve filmler hakkında
         yorum yapın. Kendi listelerinizi oluşturun ve paylaşın. Böylelikle siz

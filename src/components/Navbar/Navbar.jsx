@@ -28,7 +28,7 @@ const Navbar = () => {
 
   return (
     <div className="fixed container top-0 z-20">
-      <div className="w-full  py-6 flex justify-between items-center ">
+      <div className="w-full  py-6 flex justify-between items-center sm:px-0 px-6 ">
         <Link to="/" className="flex gap-x-2">
           <img src={Logo} className="w-8" />
           <h1 className="font-changa text-2xl  text-white ">cinemate</h1>
