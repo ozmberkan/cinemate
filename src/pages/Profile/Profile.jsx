@@ -17,6 +17,7 @@ const Profile = () => {
     defaultValues: {
       displayName: user.displayName,
       email: user.email,
+      photoURL: user.photoURL,
     },
   });
 
@@ -88,18 +89,26 @@ const Profile = () => {
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full flex justify-between items-center mb-4"
+        className="w-full  flex justify-between items-center mb-4"
       >
-        <p className="text-5xl font-changa text-white w-full flex justify-start items-center">
+        <p className="text-5xl font-changa text-white  flex justify-start items-center">
           @{user.displayName}
         </p>
-        <button
-          onClick={() => setIsEditMode(!isEditMode)}
-          type="button"
-          className="px-4 py-2 rounded-full border border-white hover:bg-white hover:text-black transition-colors duration-500 bg-transparent text-white outline-none"
-        >
-          Düzenle
-        </button>
+        <div className="flex gap-x-5 items-center justify-center">
+          <span className="px-4 py-2 rounded-md border text-neutral-400 bg-neutral-950 border-neutral-800">
+            Takip : {user?.follows?.length}
+          </span>
+          <span className="px-4 py-2 rounded-md border text-neutral-400 bg-neutral-950 border-neutral-800">
+            Takipçi : {user?.followers?.length}
+          </span>
+          <button
+            onClick={() => setIsEditMode(!isEditMode)}
+            type="button"
+            className="px-4 py-2 rounded-full border border-white hover:bg-white hover:text-black transition-colors duration-500 bg-transparent text-white outline-none"
+          >
+            Düzenle
+          </button>
+        </div>
       </motion.div>
       <motion.form
         initial={{ opacity: 0 }}

@@ -52,12 +52,21 @@ const Navbar = () => {
             >
               Çıkış Yap
             </button>
-            <Link
-              to="/profile"
-              className=" w-10 h-10  border-l border-neutral-600"
-            >
-              <img src={user?.photoURL} className="rounded-md ml-5" />
-            </Link>
+            {user?.photoURL ? (
+              <Link
+                to="/profile"
+                className=" w-10 h-10  border-l border-neutral-600"
+              >
+                <img src={user?.photoURL} className="rounded-md ml-5" />
+              </Link>
+            ) : (
+              <Link
+                to="/profile"
+                className="px-4 flex items-center  gap-x-2 rounded-full border border-white/20 py-2 hover:border-white  group-hover:opacity-100 hover:shadow-white-500 shadow-sm  hover:bg-gradient-to-t from-white/10 to-black/0 transition-all duration-1000"
+              >
+                Profilim
+              </Link>
+            )}
           </div>
         ) : (
           <div className="text-white flex items-center gap-x-3 ">

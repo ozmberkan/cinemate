@@ -70,7 +70,7 @@ export const loginService = createAsyncThunk(
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
-        photoURL: user.photoURL,
+        photoURL: userDoc.data().photoURL || null,
         emailVerified: user.emailVerified,
         lists: userDoc.data().lists || [],
         follows: userDoc.data().follows || [],
