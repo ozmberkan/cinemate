@@ -3,16 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllLists } from "~/redux/slices/listsSlice";
 import usersSvg from "/Users/UsersSvg.svg";
 import { motion } from "framer-motion";
+import { tailChase } from "ldrs";
 
 const AllList = () => {
   const dispatch = useDispatch();
-  const { lists } = useSelector((store) => store.lists);
-
+  const { lists, isLoading } = useSelector((store) => store.lists);
+  tailChase.register();
   useEffect(() => {
     dispatch(getAllLists());
   }, [dispatch]);
 
-  console.log(lists);
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen items-center flex justify-center">
+        <l-tail-chase size="40" speed="1.75" color="#B81314"></l-tail-chase>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full h-screen p-5 flex flex-grow gap-y-5 justify-start items-start relative py-32">

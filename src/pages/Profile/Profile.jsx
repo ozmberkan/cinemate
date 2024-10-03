@@ -49,6 +49,7 @@ const Profile = () => {
       await updateDoc(userRef, {
         displayName: data.displayName,
         email: data.email,
+        photoURL: data.photoURL,
       });
 
       toast.success("Başarıyla profil güncellendi!");
@@ -121,6 +122,13 @@ const Profile = () => {
             {...register("email")}
             defaultValue={user.email}
             className="px-4 py-2 rounded-md border border-neutral-700 bg-transparent text-neutral-500 outline-none"
+          />
+          <input
+            type="text"
+            disabled={!isEditMode}
+            placeholder="Kullanıcı Görseli (Link)"
+            {...register("photoURL")}
+            className="px-4 py-2 rounded-md border placeholder:text-neutral-500 border-neutral-700 bg-transparent text-neutral-500 outline-none"
           />
           {isEditMode && (
             <motion.button

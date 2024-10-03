@@ -23,7 +23,7 @@ const Users = () => {
   if (isLoading) {
     return (
       <div className="w-full h-screen items-center flex justify-center">
-        <l-tail-chase size="40" speed="1.75" color="#F37E4F"></l-tail-chase>
+        <l-tail-chase size="40" speed="1.75" color="#B81314"></l-tail-chase>
       </div>
     );
   }

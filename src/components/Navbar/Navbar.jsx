@@ -45,12 +45,19 @@ const Navbar = () => {
                 {tab.icon && <tab.icon size={20} className="text-red-500" />}
               </Link>
             ))}
+
             <button
               onClick={exit}
               className="px-4 rounded-full border border-white/20 py-2 hover:border-red-500 hover:text-red-500 hover:shadow-red-500 shadow-sm   group-hover:opacity-100 hover:bg-gradient-to-t from-red-500/10 to-black/0 transition-all duration-700"
             >
               Çıkış Yap
             </button>
+            <Link
+              to="/profile"
+              className=" w-10 h-10  border-l border-neutral-600"
+            >
+              <img src={user?.photoURL} className="rounded-md ml-5" />
+            </Link>
           </div>
         ) : (
           <div className="text-white flex items-center gap-x-3 ">

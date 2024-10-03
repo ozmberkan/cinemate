@@ -15,6 +15,7 @@ import moment from "moment";
 import addListSvg from "/Add/AddSvg.svg";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
+import { tailChase } from "ldrs";
 
 const AddList = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const AddList = () => {
   const { user } = useSelector((state) => state.user);
   const [selectedMovies, setSelectedMovies] = useState([]);
   const [listName, setListName] = useState("");
-
+  tailChase.register();
   const createdAt = new Date();
   const formattedDate = moment(createdAt).format("DD.MM.YYYY HH:mm");
 
@@ -33,7 +34,7 @@ const AddList = () => {
   if (isLoading) {
     return (
       <div className="w-full h-screen items-center flex justify-center">
-        Yükleniyor..
+        <l-tail-chase size="40" speed="1.75" color="#B81314"></l-tail-chase>
       </div>
     );
   }

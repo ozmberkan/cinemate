@@ -28,7 +28,6 @@ export const navTabs = [
   { id: 4, label: "Listeler", to: "/lists", icon: BsStars },
   { id: 1, label: "Liste Oluştur", to: "/add-list" },
   { id: 2, label: "Kullanıcılar", to: "/users" },
-  { id: 3, label: "Profilim", to: "/profile" },
 ];
 
 export const howItWorks = [
