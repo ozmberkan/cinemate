@@ -13,13 +13,13 @@ const AllList = () => {
     dispatch(getAllLists());
   }, [dispatch]);
 
-  if (isLoading) {
-    return (
-      <div className="w-full h-screen items-center flex justify-center">
-        <l-tail-chase size="40" speed="1.75" color="#B81314"></l-tail-chase>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="w-full h-screen items-center flex justify-center">
+  //       <l-tail-chase size="40" speed="1.75" color="#B81314"></l-tail-chase>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="w-full h-screen p-5 flex flex-grow gap-y-5 justify-start items-start relative py-32">

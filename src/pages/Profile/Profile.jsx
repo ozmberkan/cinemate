@@ -86,9 +86,9 @@ const Profile = () => {
     <div className="w-full py-32 flex justify-start items-start flex-col gap-y-3 ">
       <img src={usersSvg} className="absolute top-0 left-0 -z-10" />
       <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
         className="w-full  flex justify-between items-center mb-4"
       >
         <p className="text-5xl font-changa text-white  flex justify-start items-center">
@@ -154,7 +154,7 @@ const Profile = () => {
           <button
             type="button"
             onClick={() => sendNewPassword(user.email)}
-            className="px-4 py-2 rounded-md border border-neutral-800 bg-transparent text-neutral-500 outline-none"
+            className="px-4 py-2 rounded-md border border-neutral-800 bg-transparent text-neutral-500 outline-none  transition-colors hover:text-white"
           >
             Parolamı Değiştir!
           </button>
@@ -162,7 +162,7 @@ const Profile = () => {
             <button
               type="button"
               onClick={() => sendConfirmEmail(user.email)}
-              className="px-4 py-2 rounded-md border border-neutral-800 bg-transparent text-neutral-500 outline-none"
+              className="px-4 py-2 rounded-md border border-neutral-800 bg-transparent text-neutral-500 outline-none  transition-colors hover:text-white"
             >
               E-Posta Doğrula!
             </button>
@@ -173,62 +173,73 @@ const Profile = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="w-full flex justify-start items-center text-4xl text-white mb-2"
+        className="w-full flex justify-start items-center text-4xl text-white my-2"
       >
         Listelerim
       </motion.h1>
-      {user.lists.length > 0 ? (
-        user.lists.map((list, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 * i, duration: 0.5 }}
-            className="w-full grid grid-cols-1 gap-5"
-          >
-            <div className="flex flex-col border border-neutral-700 gap-y-4 p-4 rounded-md bg-neutral-950">
-              <h1 className="text-center text-3xl font-bold text-white">
-                {list.listName}
-              </h1>
-              {list.movies.map((movie, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2 * i, duration: 0.5 }}
-                  className="flex flex-col gap-y-4 relative"
+      <div className="w-full grid grid-cols-4 gap-5">
+        {user.lists.length > 0 ? (
+          user.lists.map((list, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 * i, duration: 0.5 }}
+              className="border flex justify-center items-center flex-col text-center p-4 rounded-xl bg-neutral-950 border-neutral-700"
+            >
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="text-white flex flex-col w-full"
+              >
+                <div className="flex justify-between items-center w-full">
+                  <span className="text-sm">@{user.displayName}</span>
+                  <span className="px-4 py-1 rounded-full text-neutral-600 bg-neutral-950 border border-neutral-600">
+                    {list.createdAt ? list.createdAt : "Oluşturulma Tarihi Yok"}
+                  </span>
+                </div>
+                <div className="flex justify-start items-center py-2 w-full">
+                  <span className="text-2xl">{list.listName}</span>
+                </div>
+              </motion.div>
+              {list.movies.map((movie, movieIndex) => (
+                <div
+                  key={movieIndex}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.1 * movieIndex, duration: 0.5 }}
+                  className="flex flex-col gap-y-5 relative"
                 >
+                  <img
+                    src={`https://image.tmdb.org/t/p/original/${movie.image}`}
+                    className="w-full rounded-md object-cover mb-5"
+                    alt={movie.title}
+                  />
                   <span className="text-white absolute top-5 left-5 text-sm px-4 py-1 ring-2 ring-red-500/30 rounded-full bg-black">
                     {movie.title}
                   </span>
-                  <img
-                    src={`https://image.tmdb.org/t/p/original/${movie.image}`}
-                    className="w-full h-[200px] object-cover rounded-md mb-2"
-                    alt={movie.title}
-                  />
-                </motion.div>
+                </div>
               ))}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <button
                 onClick={() => deleteList(list)}
-                className="px-4 rounded-full border border-white/20 py-2 hover:border-red-500 text-red-500 hover:shadow-red-500 shadow-sm  group-hover:opacity-100 hover:bg-gradient-to-t from-red-500/10 to-black/0 transition-all duration-700"
+                className="px-4 w-full rounded-full border border-white/20 py-2 hover:border-red-500 text-red-500 hover:shadow-red-500 shadow-sm group-hover:opacity-100 hover:bg-gradient-to-t from-red-500/10 to-black/0 transition-all duration-700 mt-4"
               >
                 Sil
-              </motion.button>
-            </div>
-          </motion.div>
-        ))
-      ) : (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="w-full bg-neutral-950 px-4 py-2 rounded-md text-neutral-600 border border-neutral-800"
-        >
-          Henüz herhangi bir liste eklemedin, hemen yeni bir liste oluştur!
-        </motion.div>
-      )}
+              </button>
+            </motion.div>
+          ))
+        ) : (
+          <div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="w-full bg-neutral-950 px-4 py-2 rounded-md text-neutral-600 border border-neutral-800"
+          >
+            Henüz herhangi bir liste eklemedin, hemen yeni bir liste oluştur!
+          </div>
+        )}
+      </div>
     </div>
   );
 };

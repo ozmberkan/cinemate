@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "~/firebase/firebase";
 import { useSelector } from "react-redux";
@@ -11,6 +11,21 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const { user } = useSelector((store) => store.user);
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const exit = async () => {
     try {
@@ -27,7 +42,11 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed container top-0 z-20">
+    <div
+      className={`fixed container top-0 z-20 px-5 border-transparent border transition-all duration-500 rounded-full  ${
+        isScrolled ? "bg-black/90 top-5 border" : ""
+      } `}
+    >
       <div className="w-full  py-6 flex justify-between items-center sm:px-0 px-6 ">
         <Link to="/" className="flex gap-x-2">
           <img src={Logo} className="w-8" />
@@ -53,11 +72,8 @@ const Navbar = () => {
               Çıkış Yap
             </button>
             {user?.photoURL ? (
-              <Link
-                to="/profile"
-                className=" w-10 h-10  border-l border-neutral-600"
-              >
-                <img src={user?.photoURL} className="rounded-md ml-5" />
+              <Link to="/profile" className=" w-10 h-10   border-neutral-600">
+                <img src={user?.photoURL} className="rounded-md" />
               </Link>
             ) : (
               <Link
