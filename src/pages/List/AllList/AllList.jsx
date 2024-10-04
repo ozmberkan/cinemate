@@ -4,10 +4,15 @@ import { getAllLists } from "~/redux/slices/listsSlice";
 import usersSvg from "/Users/UsersSvg.svg";
 import { motion } from "framer-motion";
 import { tailChase } from "ldrs";
+import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
+import { db } from "~/firebase/firebase";
+import toast from "react-hot-toast";
+import { getUserById } from "~/redux/slices/userSlice";
 
 const AllList = () => {
   const dispatch = useDispatch();
   const { lists, isLoading } = useSelector((store) => store.lists);
+  const { user } = useSelector((store) => store.user);
   tailChase.register();
   useEffect(() => {
     dispatch(getAllLists());
@@ -20,6 +25,20 @@ const AllList = () => {
   //     </div>
   //   );
   // }
+
+  const addToFavorites = async (list) => {
+    try {
+      const userRef = doc(db, "users", user.uid);
+
+      await updateDoc(userRef, {
+        favorites: arrayUnion(list),
+      });
+      toast.success("Liste başarıyla favorilere eklendi.");
+      dispatch(getUserById(user.uid));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="w-full h-screen p-5 flex flex-grow gap-y-5 justify-start items-start relative py-32">
@@ -72,6 +91,12 @@ const AllList = () => {
                 </span>
               </motion.div>
             ))}
+            <button
+              onClick={() => addToFavorites(list)}
+              className="px-4 w-full rounded-full border border-white/20 py-2 hover:border-green-500 text-green-500 hover:shadow-green-500 shadow-sm  group-hover:opacity-100 hover:bg-gradient-to-t from-green-500/10 to-black/0 transition-all duration-700"
+            >
+              Favorilere Ekle
+            </button>
           </motion.div>
         ))}
       </motion.div>

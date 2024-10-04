@@ -25,7 +25,7 @@ const Register = () => {
       navigate("/");
     }
     if (isError) {
-      console.log("Hata var!");
+      toast.error("Kayıt olurken bir hata oluştu. Lütfen tekrar deneyin.");
     }
   }, [isSuccess, isError, navigate]);
 

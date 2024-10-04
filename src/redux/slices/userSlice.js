@@ -42,6 +42,7 @@ export const registerService = createAsyncThunk(
         lists: [],
         follows: [],
         followers: [],
+        favorites: [],
       };
 
       await setDoc(doc(collection(db, "users"), user.uid), userData);
@@ -75,6 +76,7 @@ export const loginService = createAsyncThunk(
         lists: userDoc.data().lists || [],
         follows: userDoc.data().follows || [],
         followers: userDoc.data().followers || [],
+        favorites: userDoc.data().favorites || [],
       };
 
       return userData;

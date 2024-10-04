@@ -33,7 +33,7 @@ const Login = () => {
       navigate("/");
     }
     if (isError) {
-      console.log("Hata var!");
+      toast.error("Giriş yaparken bir hata oluştu. Lütfen tekrar deneyin.");
     }
   }, [isSuccess, isError, navigate]);
 
