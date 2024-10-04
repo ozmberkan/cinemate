@@ -91,12 +91,18 @@ const AllList = () => {
                 </span>
               </motion.div>
             ))}
-            <button
-              onClick={() => addToFavorites(list)}
-              className="px-4 w-full rounded-full border border-white/20 py-2 hover:border-green-500 text-green-500 hover:shadow-green-500 shadow-sm  group-hover:opacity-100 hover:bg-gradient-to-t from-green-500/10 to-black/0 transition-all duration-700"
-            >
-              Favorilere Ekle
-            </button>
+            {user.favorites.some((favorite) => favorite.id === list.id) ? (
+              <span className="px-4 w-full rounded-full border border-white/20 py-2 hover:border-green-500 text-green-500 hover:shadow-green-500 shadow-sm  group-hover:opacity-100 hover:bg-gradient-to-t from-green-500/10 to-black/0 transition-all duration-700">
+                Favorilere Ekledin
+              </span>
+            ) : (
+              <button
+                onClick={() => addToFavorites(list)}
+                className="px-4 w-full rounded-full border border-white/20 py-2 hover:border-green-500 text-green-500 hover:shadow-green-500 shadow-sm  group-hover:opacity-100 hover:bg-gradient-to-t from-green-500/10 to-black/0 transition-all duration-700"
+              >
+                Favorilere Ekle
+              </button>
+            )}
           </motion.div>
         ))}
       </motion.div>

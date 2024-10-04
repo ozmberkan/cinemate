@@ -28,23 +28,23 @@ const App = () => {
         },
         {
           path: "users",
-          element: user ? <Users /> : <Navigate to="/login" />,
+          element: user ? <Users /> : <Navigate to="/" />,
         },
         {
           path: "add-list",
-          element: user ? <AddList /> : <Navigate to="/login" />,
+          element: user ? <AddList /> : <Navigate to="/" />,
         },
         {
           path: "profile",
-          element: user ? <Profile /> : <Navigate to="/login" />,
+          element: user ? <Profile /> : <Navigate to="/" />,
         },
         {
           path: "profile/:id",
-          element: user ? <ProfileDetail /> : <Navigate to="/login" />,
+          element: user ? <ProfileDetail /> : <Navigate to="/" />,
         },
         {
           path: "lists",
-          element: user ? <AllList /> : <Navigate to="/login" />,
+          element: user ? <AllList /> : <Navigate to="/" />,
         },
       ],
     },

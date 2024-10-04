@@ -44,6 +44,25 @@ const Profile = () => {
     }
   };
 
+  const deleteFavList = async (list) => {
+    try {
+      const userRef = doc(db, "users", user.uid);
+
+      const deletedList = user.favorites.filter(
+        (item) => item.listName !== list.listName
+      );
+
+      await updateDoc(userRef, {
+        favorites: deletedList,
+      });
+
+      dispatch(getUserById(user.uid));
+      toast.success("Başarıyla favori Silindi.");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const changeProfile = async (data) => {
     try {
       const userRef = doc(db, "users", user.uid);
@@ -178,9 +197,9 @@ const Profile = () => {
       >
         Listelerim
       </motion.h1>
-      {user.lists.length > 0 ? (
-        user.lists.map((list, i) => (
-          <div className="w-full grid grid-cols-4 gap-5">
+      <div className="w-full grid grid-cols-4 gap-5 ">
+        {user.lists.length > 0 ? (
+          user.lists.map((list, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 50 }}
@@ -229,18 +248,18 @@ const Profile = () => {
                 Sil
               </button>
             </motion.div>
+          ))
+        ) : (
+          <div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="w-full bg-neutral-950 px-4 py-2 rounded-md text-neutral-600 border border-neutral-800 "
+          >
+            Henüz herhangi bir liste eklemedin, hemen yeni bir liste oluştur!
           </div>
-        ))
-      ) : (
-        <div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="w-full bg-neutral-950 px-4 py-2 rounded-md text-neutral-600 border border-neutral-800 "
-        >
-          Henüz herhangi bir liste eklemedin, hemen yeni bir liste oluştur!
-        </div>
-      )}
+        )}
+      </div>
       <motion.h1
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -249,9 +268,9 @@ const Profile = () => {
       >
         Favorilerim
       </motion.h1>
-      {user.favorites.length > 0 ? (
-        user.favorites.map((list, i) => (
-          <div className="w-full grid grid-cols-4 gap-5">
+      <div className="w-full grid grid-cols-4 gap-5 ">
+        {user.favorites.length > 0 ? (
+          user.favorites.map((list, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 50 }}
@@ -294,24 +313,24 @@ const Profile = () => {
                 </div>
               ))}
               <button
-                onClick={() => deleteList(list)}
+                onClick={() => deleteFavList(list)}
                 className="px-4 w-full rounded-full border border-white/20 py-2 hover:border-red-500 text-red-500 hover:shadow-red-500 shadow-sm group-hover:opacity-100 hover:bg-gradient-to-t from-red-500/10 to-black/0 transition-all duration-700 mt-4"
               >
                 Sil
               </button>
             </motion.div>
+          ))
+        ) : (
+          <div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="w-full bg-neutral-950 px-4 py-2 rounded-md text-neutral-600 border border-neutral-800"
+          >
+            Henüz herhangi bir favori eklemedin
           </div>
-        ))
-      ) : (
-        <div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="w-full bg-neutral-950 px-4 py-2 rounded-md text-neutral-600 border border-neutral-800"
-        >
-          Henüz herhangi bir favori eklemedin
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
